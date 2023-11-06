@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:weather_app/page/searsh_page.dart';
+import 'package:weather_app/service/weather_service.dart';
 import 'package:weather_app/widgets/image_text.dart';
 import '../widgets/custom_location.dart';
 import '../widgets/hour_weather.dart';
@@ -20,7 +22,10 @@ class HomePage extends StatelessWidget {
                   onTap: (){
 
 
-
+                    WeatherService().getWeather();
+                    Navigator.push(context, MaterialPageRoute(builder: (context) {
+                      return SearchPage();
+                    },));
 
 
                   },
