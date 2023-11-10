@@ -1,52 +1,42 @@
 class WeatherModels {
-  String _name;
-  String _icon;
-  String _avgtemp_f;
-  String _text;
-  String _mintemp_f;
-  String _maxtemp_f;
-  String _totalprecip_mm;
-  String _avgtemp_c;
-  String _gust_kph;//الرياح
-  String _temp_f_hour;
-  String _icon_hour;
-  String _time_hour;
+  String name;
+  double avgtemp_c;
+  double maxtemp_c;
+  double mintemp_c;
+  double totalprecip_mm;
+  double avgtemp_f;
+  double gust_kph; //الرياح
+  DateTime date;
+  String mode;
+  String text;
+  List<dynamic> hour;
 
   WeatherModels(
-      this._name,
-      this._icon,
-      this._avgtemp_f,
-      this._text,
-      this._mintemp_f,
-      this._maxtemp_f,
-      this._totalprecip_mm,
-      this._avgtemp_c,
-      this._gust_kph,
-      this._temp_f_hour,
-      this._icon_hour,
-      this._time_hour);
+      {required this.name,
+        required this.avgtemp_c,
+        required this.maxtemp_c,
+        required this.mintemp_c,
+        required this.totalprecip_mm,
+        required this.avgtemp_f,
+        required this.gust_kph,
+        required this.date,
+        required this.mode,
+        required this.text,
+        required this.hour});
 
-  String get time_hour => _time_hour;
-
-  String get icon_hour => _icon_hour;
-
-  String get temp_f_hour => _temp_f_hour;
-
-  String get gust_kph => _gust_kph;
-
-  String get avgtemp_c => _avgtemp_c;
-
-  String get totalprecip_mm => _totalprecip_mm;
-
-  String get maxtemp_f => _maxtemp_f;
-
-  String get mintemp_f => _mintemp_f;
-
-  String get text => _text;
-
-  String get avgtemp_f => _avgtemp_f;
-
-  String get icon => _icon;
-
-  String get name => _name;
+  factory WeatherModels.fromJson(dynamic dataJson) {
+    var path = dataJson['forecast']['forecastday'][0];
+    return WeatherModels(
+        name: dataJson['location']['name'],
+        avgtemp_c: path['day']['avgtemp_c'],
+        maxtemp_c: path['day']['maxtemp_c'],
+        mintemp_c: path['day']['mintemp_c'],
+        totalprecip_mm: dataJson['forecast']['forecastday'][0]['day']['totalprecip_mm'],
+        avgtemp_f: path['day']['avgtemp_f'],
+        gust_kph: dataJson['current']['gust_kph'],
+        date: DateTime.parse(path['date']),
+        mode: dataJson['current']['condition']['text'],
+        text: path['day']['condition']['text'],
+        hour: path['hour']);
+  }
 }
