@@ -12,12 +12,7 @@ class SearchPage extends StatelessWidget {
 
   void getWeather(String cityName, context) async {
     WeatherService weatherService = WeatherService();
-    WeatherModels weatherModels = await weatherService.getWeather();
-    print('===========================');
-    print(weatherModels.name);
-    print(weatherModels.hour[0]['temp_c']);
-    print('===========================');
-
+    WeatherModels weatherModels = await weatherService.getWeather(cityName);
 
      Provider.of<WeatherProvider>(context, listen: false).weatherModels =
         weatherModels;
@@ -27,32 +22,38 @@ class SearchPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: const Color(0XFF29B2DD),
       appBar: AppBar(
         title: const Text('Search'),
       ),
-      body: Center(
-        child: Padding(
-          padding: const EdgeInsets.all(8.0),
-          child: TextField(
-            onChanged: (value) {
-              cityName = value;
-            },
-            onSubmitted: (value) {
-              getWeather(value, context);
-            },
-            decoration: InputDecoration(
-                hintText: 'Enter city name',
-                label: const Text('City name'),
-                suffixIcon: IconButton(
-                  onPressed: () {
-                    getWeather(cityName!, context);
-                  },
-                  icon: const Icon(Icons.search),
-                ),
-                border: OutlineInputBorder(
-                  gapPadding: 5,
-                  borderRadius: BorderRadius.circular(10),
-                )),
+      body: Container(
+        decoration: const BoxDecoration(
+          image: DecorationImage(image: AssetImage('assets/images/gif/woman_day.gif')),
+        ),
+        child: Center(
+          child: Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: TextField(
+              onChanged: (value) {
+                cityName = value;
+              },
+              onSubmitted: (value) {
+                getWeather(value, context);
+              },
+              decoration: InputDecoration(
+                  hintText: 'Enter city name',
+                  label: const Text('City name'),
+                  suffixIcon: IconButton(
+                    onPressed: () {
+                      getWeather(cityName!, context);
+                    },
+                    icon: const Icon(Icons.search),
+                  ),
+                  border: OutlineInputBorder(
+                    gapPadding: 5,
+                    borderRadius: BorderRadius.circular(10),
+                  )),
+            ),
           ),
         ),
       ),
