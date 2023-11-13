@@ -1,7 +1,6 @@
-import 'package:flutter/material.dart';
-
 class WeatherModels {
   String name;
+  String localtime;
   double avgtemp_c;
   double maxtemp_c;
   double mintemp_c;
@@ -15,6 +14,7 @@ class WeatherModels {
 
   WeatherModels(
       {required this.name,
+      required this.localtime,
       required this.avgtemp_c,
       required this.maxtemp_c,
       required this.mintemp_c,
@@ -30,6 +30,7 @@ class WeatherModels {
     var path = dataJson['forecast']['forecastday'][0];
     return WeatherModels(
         name: dataJson['location']['name'],
+        localtime: dataJson['location']['localtime'],
         avgtemp_c: path['day']['avgtemp_c'],
         maxtemp_c: path['day']['maxtemp_c'],
         mintemp_c: path['day']['mintemp_c'],
@@ -55,7 +56,8 @@ class WeatherModels {
         mode == 'Light freezing rain' ||
         mode == 'Fog' ||
         mode == 'Freezing fog' ||
-        mode == 'Overcast') {
+        mode == 'Overcast'||
+        mode=='Mist') {
       path = 'assets/images/8.png';
     } else if (mode == 'Light sleet' ||
         mode == 'Light sleet showers' ||
@@ -105,20 +107,11 @@ class WeatherModels {
     } else if (mode == 'Moderate or heavy snow with thunder') {
       return path = 'assets/images/14.png';
     }
-    return path!;
-  }
-
-  Color getMode() {
-    var color;
-    switch (mode) {
-      case 'Clear':
-        color = Colors.yellow;
-        break;
-      case '':
-        color = Colors.green;
-        break;
+    else{
+      return path ='assets/images/11.png';
     }
 
-    return color;
+    return path;
   }
+
 }

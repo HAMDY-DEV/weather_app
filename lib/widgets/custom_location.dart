@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+// ignore: must_be_immutable
 class CustomLocation extends StatelessWidget {
   String cityName;
   CustomLocation(this.cityName, {super.key});
@@ -8,12 +9,12 @@ class CustomLocation extends StatelessWidget {
     return Row(children: [
       Text(
         cityName,
-        style: TextStyle(
+        style: const TextStyle(
             color: Colors.white,
             fontSize: 20,
             fontWeight: FontWeight.w600),
       ),
-      Icon(Icons.keyboard_arrow_down,color: Colors.white,)
+      const Icon(Icons.keyboard_arrow_down,color: Colors.white,)
 
     ],);
   }

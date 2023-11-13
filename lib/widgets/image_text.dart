@@ -1,8 +1,10 @@
+// ignore_for_file: must_be_immutable
+
 import 'package:flutter/material.dart';
 class ImageText extends StatelessWidget{
-  String _imagePith;
-  String _text;
-  ImageText(this._imagePith, this._text);
+  final String _imagePith;
+  final String _text;
+  const ImageText(this._imagePith, this._text, {super.key});
 
   @override
   Widget build(BuildContext context) {

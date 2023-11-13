@@ -15,12 +15,16 @@ class NoWeatherPage extends StatelessWidget {
             width: 400,
             height: 400,
           ),
-          const Text('Start searching now 🔍 !',style: TextStyle(color: Colors.white,fontSize: 20,fontWeight: FontWeight.w600),),
+          const Text(
+            'Start searching now 🔍 !',
+            style: TextStyle(
+                color: Colors.white, fontSize: 20, fontWeight: FontWeight.w600),
+          ),
           ElevatedButton(
               onPressed: () {
                 Navigator.push(context, MaterialPageRoute(
                   builder: (context) {
-                    return SearchPage();
+                    return const SearchPage();
                   },
                 ));
               },
@@ -29,7 +33,6 @@ class NoWeatherPage extends StatelessWidget {
                 style:
                     TextStyle(color: Colors.white, fontWeight: FontWeight.w600),
               )),
-
           const Spacer(),
         ],
       ),
